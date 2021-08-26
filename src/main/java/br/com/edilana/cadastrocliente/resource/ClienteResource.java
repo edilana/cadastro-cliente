@@ -17,7 +17,7 @@ public class ClienteResource {
 	{
 		//* Cliente cliente = new Cliente();
 		//*cliente.
-		return String.format("Olá, td bem? %s! Seu endereco é", name);
+		return String.format("Olá, td bem? %s! Seu endereco é Brasília:", name);
 		
 	}		
 }
