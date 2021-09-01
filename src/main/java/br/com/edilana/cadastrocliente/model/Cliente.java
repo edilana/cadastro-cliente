@@ -9,6 +9,7 @@ public class Cliente {
 	private int idade;
 	private Date dataNascimento;
 	private Endereco endereco;
+	private DadosProfissionais dadosProfissionais;
 	
 	/** 
 	 * Retorna o nome
@@ -44,10 +45,22 @@ public class Cliente {
 	}
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}	
+	public DadosProfissionais getDadosProfissionais() {
+		return dadosProfissionais;
 	}
+	public void setDadosProfissionais(DadosProfissionais dadosProfissionais) {
+		this.dadosProfissionais = dadosProfissionais;
+	}
+	
 	@Override
 	public String toString() {
 		return "Cliente [nome=" + nome + ", sexo=" + sexo + ", idade=" + idade + ", dataNascimento=" + dataNascimento
-				+ ", endereco=" + endereco + "]";
-	}		
+				+ ", endereco=" + endereco + ", dadosProfissionais=" + dadosProfissionais + ", getNome()=" + getNome()
+				+ ", getSexo()=" + getSexo() + ", getIdade()=" + getIdade() + ", getDataNascimento()="
+				+ getDataNascimento() + ", getEndereco()=" + getEndereco() + ", getDadosProfissionais()="
+				+ getDadosProfissionais() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
+	}	
+	
 }
