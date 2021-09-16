@@ -46,7 +46,8 @@ public class ClienteResource {
 		return String.format("Nome e idade incluídos: %s, %s!", nameInclusao, idade);
 	}
 
-	/* Exclusão */
+	
+		/* Exclusão */
 	@GetMapping("/exclusaoclientes")
 	public static String Delete(
 			@RequestParam(value = "nameExclusao", defaultValue = "Banco do Brasil") String nameExclusao) {
