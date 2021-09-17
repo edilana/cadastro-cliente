@@ -21,18 +21,17 @@ public class ClienteResource {
 		/* String listaClientes = popularObjetos(); */
 		ArrayList<Cliente> listaClientes = popularObjetos();
 
-		for (int i = 0; i < listaClientes.length(); i++) {
+		for (int i = 0; i < listaClientes.size(); i++) {
 			if (listaClientes.contains(name)) {
-				System.out.println("Nome encontrado");
-				/* return "Nome encontrado"; */
 				return String.format("Nome encontrado: %s!", name);
-			} else {
+				/* return "Nome encontrado"; */
+		} else {
 				/* return "Nome não encontrado"; */
 				return String.format("Nome não encontrado: %s!", name);
 			}
 		}
 
-		return String.format("Nome encontrado: %s!", name);
+		return String.format("Pesquisa efetuada", name);
 
 	}
 
@@ -58,11 +57,11 @@ public class ClienteResource {
 
 	
     /* Alteração */	  
-	@GetMapping("/exclusaoclientes") 
+	@GetMapping("/alteracaoclientes") 
 	public static String Update(
 			@RequestParam(value = "nameAlteracao", defaultValue = "Banco do Brasil") String nameAlteracao,
 			@RequestParam(value = "idadeAlteracao", defaultValue = "90") String idadeAlteracao) {
-	  alteracao(nameAlteracao);
+	  alteracao(nameAlteracao, idadeAlteracao);
 	  return String.format("Nome alterado: %s", nameAlteracao);
 	  }
 	 
@@ -107,6 +106,7 @@ public class ClienteResource {
 		listaClientes.add(cliente1);
 		listaClientes.add(cliente2);
 
+		System.out.println(listaClientes);
 		return listaClientes;
 	}
 
@@ -142,7 +142,7 @@ public class ClienteResource {
 	}
 
 	
-	  public static String alteracao(String name) {
+	  public static String alteracao(String name, int idade) {
 	  
 	  ArrayList<Cliente> listaClientes = popularObjetos();
 	  
@@ -150,7 +150,12 @@ public class ClienteResource {
 	  while (iterator.hasNext()) { 
 		  Cliente next = iterator.next(); 
 		  if (next.equals(1)) {
-			  iterator.remove(); 
+			  iterator.remove();			  
+			  ArrayList<Cliente> alteraClientes = new ArrayList<Cliente>();
+			  Cliente cliente = new Cliente();
+			  cliente.setNome(name);
+		      cliente.setIdade(idade);
+		      alteraClientes.add(cliente);			  
 			  return String.format("Nome alterado: %s!", name);
 		  } else {
 		      return String.format("Nome não encontrado: %s!", name); } 
