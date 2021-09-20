@@ -54,6 +54,17 @@ public class ClienteResource {
 		return listaClientes;
 	}
 
+	/* Alteração */
+	@GetMapping("/alteracaoclientes")
+	public static String Update(
+			@RequestParam(value = "nameUpdate", defaultValue = "Banco do Brasil") String nameUpdate,
+			@RequestParam(value = "idadeUpdate", defaultValue = "50") int idadeUpdate) {
+		String listaClientes = alteracao(nameUpdate, idadeUpdate);
+		System.out.println(listaClientes);
+		return listaClientes;
+	}
+	
+	
 	public static ArrayList<Cliente> popularObjetos() {
 
 		ArrayList<Cliente> listaClientes = new ArrayList<Cliente>();
@@ -134,9 +145,10 @@ public class ClienteResource {
 		for (Cliente cliente : listaClientes) {
 			if (cliente.getNome().equals(name)) {
 				cliente.setIdade(idade);
+				return String.format("Nome alterado: %s!", name);
 			}
 		}
-		return listaClientes.toString();
+		return String.format("Nome não encontrado: %s!", name);
 	}
 
 }
