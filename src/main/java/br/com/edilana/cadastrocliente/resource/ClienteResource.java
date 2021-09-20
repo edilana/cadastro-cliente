@@ -18,22 +18,19 @@ public class ClienteResource {
 	@GetMapping("/clientes")
 	public String getCliente(@RequestParam(value = "name", defaultValue = "Banco do Brasi") String name) {
 
-		/* String listaClientes = popularObjetos(); */
+		
 		ArrayList<Cliente> listaClientes = popularObjetos();
 
 		for (int i = 0; i < listaClientes.size(); i++) {
 			Cliente cliente = listaClientes.get(i);
+			System.out.println(cliente.getNome());
+			System.out.println(name);
 			if (cliente.getNome().contains(name)) {
 				return String.format("Nome encontrado: %s!", name);
 				/* return "Nome encontrado"; */
-			} else {
-				/* return "Nome não encontrado"; */
-				return String.format("Nome não encontrado: %s!", name);
-			}
+			} 
 		}
-
-		return String.format("Pesquisa efetuada", name);
-
+		return String.format("Nome não encontrado: %s!", name);
 	}
 
 	/* Inclusao */
@@ -54,31 +51,8 @@ public class ClienteResource {
 			@RequestParam(value = "nameExclusao", defaultValue = "Banco do Brasil") String nameExclusao) {
 		String listaClientes = exclusao(nameExclusao);
 		System.out.println(listaClientes);
-		/* System.out.println(exclusao(nameExclusao)); */
-		/* return String.format("Nome excluído: %s", nameExclusao); */
 		return listaClientes;
 	}
-
-	/*
-	 * Alteração
-	 * 
-	 * @GetMapping("/alteracaoclientes") public static String Update(
-	 * 
-	 * @RequestParam(value = "nameAlteracao", defaultValue = "Banco do Brasil")
-	 * String nameAlteracao,
-	 * 
-	 * @RequestParam(value = "idadeAlteracao", defaultValue = "90") String
-	 * idadeAlteracao) { alteracao(nameAlteracao, idadeAlteracao); return
-	 * String.format("Nome alterado: %s", nameAlteracao); }
-	 * 
-	 */
-	/*
-	 * Lista Clientes
-	 * 
-	 * @GetMapping("/listaclientes") public static String ListaCliente() {
-	 * ArrayList<Cliente> listaClientes = new ArrayList<Cliente>(); return
-	 * listaClientes; }
-	 */
 
 	public static ArrayList<Cliente> popularObjetos() {
 
@@ -108,9 +82,18 @@ public class ClienteResource {
 		endereco2.setNumero(15);
 		cliente.setEndereco(endereco2);
 
+		Cliente cliente3 = new Cliente();
+		cliente3.setNome("Anderson");
+		cliente3.setIdade(15);
+		Endereco endereco3 = new Endereco();
+		endereco3.setRua("Guara");
+		endereco3.setNumero(20);
+		cliente.setEndereco(endereco3);
+
 		listaClientes.add(cliente);
 		listaClientes.add(cliente1);
 		listaClientes.add(cliente2);
+		listaClientes.add(cliente3);
 
 		System.out.println(listaClientes);
 		return listaClientes;
@@ -133,20 +116,17 @@ public class ClienteResource {
 		ArrayList<Cliente> listaClientes = popularObjetos();
 
 		Iterator<Cliente> iterator = listaClientes.iterator();
-		while (iterator.hasNext()) {
-			Cliente next = iterator.next();
-			if (next.equals(1)) {
-				iterator.remove();
-				return String.format("Nome excluído: %s!", name); 
-				/* System.out.println("Nome excluído"); */
-			} else {
-				return String.format("Nome não encontrado: %s!", name); 
-				/* System.out.println("Nome não encontrado"); */
-			}
-		}
-		return listaClientes.toString();
+		while (iterator.hasNext()) {	           
+            Cliente cliente = (Cliente) iterator.next();
+            if (cliente.getNome().equalsIgnoreCase(name)) {
+                iterator.remove();
+            	return String.format("Nome excluído: %s!", name);
+			} 
+      	}
+		 return String.format("Nome não encontrado: %s!", name);
 	}
 
+	
 	public static String alteracao(String name, int idade) {
 
 		ArrayList<Cliente> listaClientes = popularObjetos();
@@ -155,7 +135,7 @@ public class ClienteResource {
 			if (cliente.getNome().equals(name)) {
 				cliente.setIdade(idade);
 			}
-	}
+		}
 		return listaClientes.toString();
 	}
 
