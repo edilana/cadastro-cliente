@@ -136,7 +136,6 @@ public class ClienteResource {
       	}
 		 return String.format("Nome não encontrado: %s!", name);
 	}
-
 	
 	public static String alteracao(String name, int idade) {
 
