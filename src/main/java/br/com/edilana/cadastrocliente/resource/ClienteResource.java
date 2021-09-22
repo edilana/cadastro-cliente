@@ -130,11 +130,12 @@ public class ClienteResource {
 		while (iterator.hasNext()) {	           
             Cliente cliente = (Cliente) iterator.next();
             if (cliente.getNome().equalsIgnoreCase(name)) {
-                iterator.remove();
-            	return String.format("Nome excluído: %s!", name);
+                iterator.remove();                
+                System.out.println("Nome excluído");
+            	return listaClientes.toString();
 			} 
       	}
-		 return String.format("Nome não encontrado: %s!", name);
+		return listaClientes.toString();
 	}
 	
 	public static String alteracao(String name, int idade) {
@@ -144,10 +145,12 @@ public class ClienteResource {
 		for (Cliente cliente : listaClientes) {
 			if (cliente.getNome().equals(name)) {
 				cliente.setIdade(idade);
-				return String.format("Nome alterado: %s!", name);
+				System.out.println("Nome alterado");
+				return listaClientes.toString();
 			}
 		}
-		return String.format("Nome não encontrado: %s!", name);
+				System.out.println("Nome não encontrado");
+				return listaClientes.toString();
 	}
 
 }
